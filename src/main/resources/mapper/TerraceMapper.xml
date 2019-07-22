@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanma.terrace.mapper.TerraceMapper">
+  <resultMap id="BaseResultMap" type="com.hanma.terrace.domain.Terrace">
+    <id column="merchant_id" jdbcType="BIGINT" property="merchantId" />
+    <result column="staff_id" jdbcType="BIGINT" property="staffId" />
+    <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
+    <result column="merchant_status" jdbcType="INTEGER" property="merchantStatus" />
+    <result column="merchant_address" jdbcType="VARCHAR" property="merchantAddress" />
+    <result column="merchant_linkman" jdbcType="VARCHAR" property="merchantLinkman" />
+    <result column="merchant_phone" jdbcType="VARCHAR" property="merchantPhone" />
+    <result column="merchant_type" jdbcType="INTEGER" property="merchantType" />
+    <result column="merchant_grade" jdbcType="INTEGER" property="merchantGrade" />
+    <result column="merchant_img" jdbcType="VARCHAR" property="merchantImg" />
+    <result column="merchant_create_time" jdbcType="TIMESTAMP" property="merchantCreateTime" />
+    <result column="merchant_update_time" jdbcType="TIMESTAMP" property="merchantUpdateTime" />
+    <result column="merchant_yn" jdbcType="INTEGER" property="merchantYn" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hanma.terrace.domain.Terrace">
+    <result column="merchant_intro" jdbcType="LONGVARCHAR" property="merchantIntro" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    merchant_id, staff_id, merchant_name, merchant_status, merchant_address, merchant_linkman, 
+    merchant_phone, merchant_type, merchant_grade, merchant_img, merchant_create_time, 
+    merchant_update_time, merchant_yn
+  </sql>
+  <sql id="Blob_Column_List">
+    merchant_intro
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <!--<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />-->
+    *
+    from t_merchant
+    where merchant_id = #{merchantId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_merchant
+    where merchant_id = #{merchantId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hanma.terrace.domain.Terrace">
+    insert into t_merchant (merchant_id, staff_id, merchant_name, 
+      merchant_status, merchant_address, merchant_linkman, 
+      merchant_phone, merchant_type, merchant_grade, 
+      merchant_img, merchant_create_time, merchant_update_time, 
+      merchant_yn, merchant_intro)
+    values (#{merchantId,jdbcType=BIGINT}, #{staffId,jdbcType=BIGINT}, #{merchantName,jdbcType=VARCHAR}, 
+      #{merchantStatus,jdbcType=INTEGER}, #{merchantAddress,jdbcType=VARCHAR}, #{merchantLinkman,jdbcType=VARCHAR}, 
+      #{merchantPhone,jdbcType=VARCHAR}, #{merchantType,jdbcType=INTEGER}, #{merchantGrade,jdbcType=INTEGER}, 
+      #{merchantImg,jdbcType=VARCHAR}, #{merchantCreateTime,jdbcType=TIMESTAMP}, #{merchantUpdateTime,jdbcType=TIMESTAMP}, 
+      #{merchantYn,jdbcType=INTEGER}, #{merchantIntro,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hanma.terrace.domain.Terrace">
+    insert into t_merchant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="merchantId != null">
+        merchant_id,
+      </if>
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="merchantName != null">
+        merchant_name,
+      </if>
+      <if test="merchantStatus != null">
+        merchant_status,
+      </if>
+      <if test="merchantAddress != null">
+        merchant_address,
+      </if>
+      <if test="merchantLinkman != null">
+        merchant_linkman,
+      </if>
+      <if test="merchantPhone != null">
+        merchant_phone,
+      </if>
+      <if test="merchantType != null">
+        merchant_type,
+      </if>
+      <if test="merchantGrade != null">
+        merchant_grade,
+      </if>
+      <if test="merchantImg != null">
+        merchant_img,
+      </if>
+      <if test="merchantCreateTime != null">
+        merchant_create_time,
+      </if>
+      <if test="merchantUpdateTime != null">
+        merchant_update_time,
+      </if>
+      <if test="merchantYn != null">
+        merchant_yn,
+      </if>
+      <if test="merchantIntro != null">
+        merchant_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="merchantId != null">
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantName != null">
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantStatus != null">
+        #{merchantStatus,jdbcType=INTEGER},
+      </if>
+      <if test="merchantAddress != null">
+        #{merchantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantLinkman != null">
+        #{merchantLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantPhone != null">
+        #{merchantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantType != null">
+        #{merchantType,jdbcType=INTEGER},
+      </if>
+      <if test="merchantGrade != null">
+        #{merchantGrade,jdbcType=INTEGER},
+      </if>
+      <if test="merchantImg != null">
+        #{merchantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCreateTime != null">
+        #{merchantCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="merchantUpdateTime != null">
+        #{merchantUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="merchantYn != null">
+        #{merchantYn,jdbcType=INTEGER},
+      </if>
+      <if test="merchantIntro != null">
+        #{merchantIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hanma.terrace.domain.Terrace">
+    update t_merchant
+    <set>
+      <if test="staffId != null">
+        staff_id = #{staffId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantName != null">
+        merchant_name = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantStatus != null">
+        merchant_status = #{merchantStatus,jdbcType=INTEGER},
+      </if>
+      <if test="merchantAddress != null">
+        merchant_address = #{merchantAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantLinkman != null">
+        merchant_linkman = #{merchantLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantPhone != null">
+        merchant_phone = #{merchantPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantType != null">
+        merchant_type = #{merchantType,jdbcType=INTEGER},
+      </if>
+      <if test="merchantGrade != null">
+        merchant_grade = #{merchantGrade,jdbcType=INTEGER},
+      </if>
+      <if test="merchantImg != null">
+        merchant_img = #{merchantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantCreateTime != null">
+        merchant_create_time = #{merchantCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="merchantUpdateTime != null">
+        merchant_update_time = #{merchantUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="merchantYn != null">
+        merchant_yn = #{merchantYn,jdbcType=INTEGER},
+      </if>
+      <if test="merchantIntro != null">
+        merchant_intro = #{merchantIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where merchant_id = #{merchantId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hanma.terrace.domain.Terrace">
+    update t_merchant
+    set staff_id = #{staffId,jdbcType=BIGINT},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      merchant_status = #{merchantStatus,jdbcType=INTEGER},
+      merchant_address = #{merchantAddress,jdbcType=VARCHAR},
+      merchant_linkman = #{merchantLinkman,jdbcType=VARCHAR},
+      merchant_phone = #{merchantPhone,jdbcType=VARCHAR},
+      merchant_type = #{merchantType,jdbcType=INTEGER},
+      merchant_grade = #{merchantGrade,jdbcType=INTEGER},
+      merchant_img = #{merchantImg,jdbcType=VARCHAR},
+      merchant_create_time = #{merchantCreateTime,jdbcType=TIMESTAMP},
+      merchant_update_time = #{merchantUpdateTime,jdbcType=TIMESTAMP},
+      merchant_yn = #{merchantYn,jdbcType=INTEGER},
+      merchant_intro = #{merchantIntro,jdbcType=LONGVARCHAR}
+    where merchant_id = #{merchantId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hanma.terrace.domain.Terrace">
+    update t_merchant
+    set staff_id = #{staffId,jdbcType=BIGINT},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      merchant_status = #{merchantStatus,jdbcType=INTEGER},
+      merchant_address = #{merchantAddress,jdbcType=VARCHAR},
+      merchant_linkman = #{merchantLinkman,jdbcType=VARCHAR},
+      merchant_phone = #{merchantPhone,jdbcType=VARCHAR},
+      merchant_type = #{merchantType,jdbcType=INTEGER},
+      merchant_grade = #{merchantGrade,jdbcType=INTEGER},
+      merchant_img = #{merchantImg,jdbcType=VARCHAR},
+      merchant_create_time = #{merchantCreateTime,jdbcType=TIMESTAMP},
+      merchant_update_time = #{merchantUpdateTime,jdbcType=TIMESTAMP},
+      merchant_yn = #{merchantYn,jdbcType=INTEGER}
+    where merchant_id = #{merchantId,jdbcType=BIGINT}
+  </update>
+
+
+<!--查询    name :王辉-->
+  <select id="terraceQueryList" resultType="com.hanma.terrace.domain.Terrace">
+
+    select
+      *
+      from
+           t_merchant
+      <where>
+        merchant_yn = 1
+      </where>
+  </select>
+
+  <update id="deleteFun" parameterType="com.hanma.terrace.domain.Terrace">
+      UPDATE  t_merchant set merchant_yn=${0} where merchant_yn=#{merchantYn}
+  </update>
+
+
+</mapper>
